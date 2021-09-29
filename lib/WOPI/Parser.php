@@ -198,7 +198,8 @@ class Parser {
 		// FIXME: we might want to support different action types here as well like imagepreview
 		$actionName = $edit ? 'edit' : 'view';
 		$discoveryParsed = $this->getParsed();
-		$result = $discoveryParsed->xpath(sprintf('/wopi-discovery/net-zone[@name=\'external-https\']/app/action[@ext=\'%s\' and @name=\'%s\']', $file->getExtension(), $actionName));
+		$ext = pathinfo($file->getName(), PATHINFO_EXTENSION);
+		$result = $discoveryParsed->xpath(sprintf('/wopi-discovery/net-zone[@name=\'external-https\']/app/action[@ext=\'%s\' and @name=\'%s\']', $ext, $actionName));
 		if (!$result || count($result) === 0) {
 			$result = $discoveryParsed->xpath(sprintf('/wopi-discovery/net-zone[@name=\'external-https\']/app/action[@ext=\'%s\' and @name=\'%s\']', $file->getExtension(), 'view'));
 		}
